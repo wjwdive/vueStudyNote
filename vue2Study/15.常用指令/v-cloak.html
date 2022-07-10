@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-cloak指令</title>
+
+    <!-- 来阻塞js加载 -->
+
+
+</head>
+<body>
+    <!-- 
+        v-cloak指令：
+        v-cloak 配合 css使用，可以解决网速慢时界面显示{{name}}，展示未经解析模板的问题。
+        本质是一个特殊属性，Vue实例创建完毕兵接管容器后，会删掉v-cloak属性。
+     -->
+    <div id="root">
+        <h2>v-html指令学习</h2>
+        <h2>name: {{name}}</h2>
+
+
+    </div>
+
+    <script src="http://localhost:8080/resouce/5s/js/vue.js"></script>
+
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        console.log(1)
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                name: 'Jarvis',
+            }
+        })
+    </script>
+
+<style>
+    /* 当网速过慢的时候，使用v-cloak 可以让vue不解析 dom */
+    [v-cloak] {
+        display: none;
+    }
+</style>
+</body>
+</html>

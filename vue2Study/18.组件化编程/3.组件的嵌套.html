@@ -1,0 +1,113 @@
+
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vue组件嵌套</title>
+
+        <script src="../js/vue.js"></script>
+
+    </head>
+
+    <body>
+        <!-- 
+        Vue组件嵌套
+     -->
+        <div id="root">
+            
+            <!-- <student></student> -->
+
+        </div>
+
+        <script type="text/javascript">
+            Vue.config.productionTip = false
+    //定义学生组件
+    const student = Vue.extend({
+                template: `
+                    <div>
+                        <h2>学生名字：{{studentName}}</h2>
+                        <h2>学生姓名：{{studentAge}}</h2>
+                    </div>
+                `,
+                data(){
+                    return {
+                        studentName: 'Jarvis',
+                        studentAge: '18'
+                    }
+                }
+            })
+
+        //定义school组件
+        const school = Vue.extend({
+            template: `
+                <div>
+                    <h2>学校名字：{{schoolName}}</h2>
+                    <h2>学校地址：{{schoolAddress}}</h2>
+                    <student></student>
+                </div>
+            `,
+            data(){
+                return {
+                    schoolName: 'wjw',
+                    schoolAddress: '上海'
+                }
+            },
+            components: {
+                student
+            }
+        })
+
+        
+
+        //定义一个组件
+        const hello = Vue.extend({
+            template:`
+                <div>
+                    <h2>你好，{{name}}!</h2>
+                </div>
+            `,
+            data() {
+                return {
+                    name: "Marvis"
+                }
+            }
+        })
+        
+        // //全局注册组件,所有vm实例都可以使用。不需要在具体实例中注册了。
+        // Vue.component('hello', hello)
+
+        //定义app根组件，所有的组件都注册到这里; 一人之下，万人之上
+        const app = Vue.extend({
+            template: `
+                <div>
+                    <hello></hello>
+                    <school></school>
+                </div>
+            `,
+            components: {
+                school,
+                hello
+            }
+        })
+
+
+        new Vue({
+            template: `
+                <app></app>
+            `,
+            //根组件
+            el: "#root",
+            components: {
+                //第二步、key:value ，键值对配置组件注册，局部注册
+                app
+            }
+        })
+
+
+        </script>
+
+    </body>
+
+    </html>

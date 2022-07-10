@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>获取焦点的示例</title>
+</head>
+<body>
+    <button id="btn">点我创建一个输入框</button>
+    <script type="text/javascript">
+        const btn = document.getElementById('btn')
+        btn.onclick = () => {
+            const input = document.createElement('input')
+
+            input.className = 'demo'
+            input.value = 10
+            input.onclick = () => {alert(1)}
+
+            document.body.appendChild(input)
+            //必须是将子元素添加到父元素上后才可以获取焦点，
+            input.focus()
+        }
+    </script>
+
+</body>
+</html>

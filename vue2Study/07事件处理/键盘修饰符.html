@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue2-键盘事件</title>
+    <!-- 引入开发版vue -->
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        1、Vue中常用的按键别名
+            回车 ： enter
+            删除： delete (backspack,delete两个键)
+            退出： esc
+            空格： space
+            换行：tab【特殊，原本工功能，把焦点从当前元素切走，所以要和keydown配合使用】
+            上： up
+            下： down
+            左： left
+            右： right
+
+        2、Vue未提供别名的按键，可以使用按键原始的key值去绑定，但是注意要转短横线命名 kebab-case
+
+        3、系统修饰键（用法特殊）：ctrl,alt,shift,meta
+            1) 配合keyup使用：按下修饰键的同时，再按下其他键，随后释放其他键，事件才被触发。
+            2) 配合keydown使用，正常触发事件。
+
+        4、可以使用keyCode去指定具体的按键（不推荐）
+        5、Vue.config.keyCodes,自定义键名 = 键码，可以去制定按键的别名
+     -->
+
+    <div id="root">
+        <h2>vue2-Vue中常用的按键别名</h2>
+    </div>  
+
+    <script>
+        new Vue({
+            el: "#root",
+            data() {
+                return {
+                    name: "Jarvis"
+                }
+            },
+            methods: {
+                
+            },
+        })
+
+
+    </script>
+
+</style>
+</html>

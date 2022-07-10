@@ -1,0 +1,112 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初识组件</title>
+
+    <script src="../js/vue.js"></script>
+
+</head>
+<body>
+    <!-- 
+        Vue组件定义注意：
+        组件起名规范，
+        若是一个单词的组件，，定义，注册，使用，全部小写即可
+        若是多个单词组件，定义 可以随便起名字，使用 ，注册使用格式：my-school。或者MySchool.但是使用的时候，
+        。但是是使用了脚手架的才可以。
+
+        1.关于组件名
+        一个单词组成：
+            第一种写法：首字母小写，shcool
+            第二种写法: 首字母大写，School
+        多个单词组成：
+            第一种写法：kebab-case命名： my-school
+            第二种写法：CamelCase命名： MySchool（需要Vue脚手架支持）
+        备注：
+            1)组件名尽可能回避HTML中已有的标签，例如h2,p
+            2)可以使用name配置指定组件在开发者工具中呈现的名字
+        2.关于组件标签
+            第一种写法-全闭合：<school></school>
+            第二种写法-自闭合：<school/>
+            备注：不用使用脚手架，<school/> 会导致后续组件不能渲染
+        3.一个简写方式：
+            cosnt school = Vue.extend(options)可简写为 const school = options
+     -->
+    <div id="root">
+        <!-- 第三步，编写组件标签 -->
+        <school></school>
+        <hr>
+        <student></student>
+       
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+
+        //第一步、创建一个组件，Vue.extends()传入一个配置项
+        const school = Vue.extend({
+            // el: "#el",//不再用el指定挂载结点
+            // data:{}，//不在用data对象，要用data(){return{}}函数，函数返回数据
+            template: `
+                <div>
+                    <h2>学校名字：{{schoolName}}</h2>
+                    <h2>学校地址：{{schoolAddress}}</h2>
+                </div>
+            `,
+            data(){
+                return {
+                    schoolName: 'wjw',
+                    schoolAddress: '上海'
+                }
+            }
+        })
+        const student = Vue.extend({
+            // el: "#el",//不再用el指定挂载结点
+            // data:{}，//不在用data对象，要用data(){return{}}函数，函数返回数据
+            template: `
+                <div>
+                    <h2>学生名字：{{studentName}}</h2>
+                    <h2>学生姓名：{{studentAge}}</h2>
+                </div>
+            `,
+            data(){
+                return {
+                    studentName: 'Jarvis',
+                    studentAge: '18'
+                }
+            }
+        })
+
+        //定义一个组件
+        const hello = Vue.extend({
+            template:`
+                <div>
+                    <h2>你好，{{name}}!</h2>
+                </div>
+            `,
+            data() {
+                return {
+                    name: "Marvis"
+                }
+            }
+        })
+
+        //全局注册组件,所有vm实例都可以使用。不需要在具体实例中注册了。
+        Vue.component('hello', hello)
+
+        new Vue({
+            //根组件
+            el: "#root",
+            components: {
+                //第二步、key:value ，键值对配置组件注册，局部注册
+                school,
+                student,
+            }
+        })
+
+
+    </script>
+
+</body>
+</html>

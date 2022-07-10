@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15.内置指令</title>
+
+    <script src="js/vue.js"></script>
+    <script src="js/day.js"></script>
+</head>
+<body>
+    <!-- 
+        我们学过的指令：
+        v-bind: 单向数据绑定解析表达式，可以简写:xxx
+        v-model:双向数据绑定
+        v-for：遍历数组、对象、字符串
+        v-on: 绑定监听事件，可简写为@
+        v-if: 条件渲染
+        v-else-if:条件渲染
+        v-else:条件渲染
+        v-show:条件渲染
+
+        v-text指令：
+            
+     -->
+    <div id="root">
+        <div>插值语法name:{{name}}</div>
+        <h3>v-text指令会吧标签中的值替换掉，v-text 不会解析标签</h3>
+        <div v-text="name">v-text指令会吧标签中的值全部替换掉</div>
+
+
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+
+
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                time: 1657034001348,
+                name: 'Jarvis'
+            },
+        })
+    </script>
+
+</body>
+</html>

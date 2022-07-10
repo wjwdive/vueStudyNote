@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue2-事件修饰符</title>
+    <!-- 引入开发版vue -->
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        Vue中的事件修饰符
+        1.prevent:阻止默认事件（常用）
+        2.stop：阻止事件冒泡（常用）
+        3.once：事件只触发一次（常用）
+        4.capture：使用事件的捕获模式
+        5.self:只有event.target是当前操作的元素时才触发事件
+        6.passive：事件的默认行为立即执行，无需等待事件回调执行
+     -->
+    <div id="root">
+        <h2>vue2-事件修饰符</h2>
+
+        <!-- 阻止默认事件 -->
+        <button href="http://www.baidu.com" @click.prevent="showInfo">阻止默认事件</button>
+        <!-- 阻止冒泡事件 ,层级元素都有事件-->
+        <div class="popDemo" @click="showInfo">
+            <button @click.stop="showInfo">阻止冒泡事件</button>
+        </div>
+        <!-- 事件只触发一次 -->
+        <button @click.once="showInfo">事件只触发一次</button>
+        <!-- 使用事件的捕获模式
+            div1嵌套div2，点击div2的时候，事件捕获是div1->div2,事件冒泡是 div2->div1、
+            冒泡的时候才去处理事件。
+            我不想在冒泡的时候去处理事件，在捕获阶段就处理事件
+            @click,不加capture 点击div2,会打印2,1
+            在div1的@click上加了 .capture，会打印1,2
+        -->
+        <div class="box1" @click.capture="box1Click(1)">
+            div1，事件捕获修饰符
+            <div class="box2" @click="box2Click(2)">
+                div2，事件捕获修饰符
+            </div>
+        </div>
+
+        <!-- self:只有event.target是当前操作的元素时才触发事件
+            某种程度，子元素事件上加stop，阻止事件冒泡
+            和这里的在父元素上的@click事件加self是一种效果， 阻止了冒泡
+        -->
+        <div class="popDemo" @click.self="showSelfFea">
+            div内有一个button
+            <button @click="showSelfFea">self修饰符</button>
+        </div>
+
+        <!-- 
+            6.passive：事件的默认行为立即执行，无需等待事件回调执行
+
+            @scroll, 滚动事件，滚动条的滚动
+            @wheel,鼠标的滚轮触发的滚动
+
+            结合滚动示例，
+            滚动时，事件超时，会影响界面及时响应，使用passive就可以先及时执行默认事件，而不会卡顿住
+            在移动端常用
+         -->
+
+         <ul @wheel.passive="scrollAction" class="list">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+         </ul>
+
+
+    </div>
+    
+    <script type="text/javascript">
+        Vue.config.productionTip = false//阻止vue在启动时产生提示
+
+        new Vue({
+            el: "#root",
+            data: {
+                
+            },
+            methods: {  
+                showInfo(e){
+                    e.preventDefault();//或者使用@click.prevnet，prevnet事件修饰符，事件的行为
+                    alert("弹窗提示!");
+                },
+                box1Click(num) {
+                    console.log(num)
+                },
+                box2Click(num) {
+                    console.log(num)
+                },
+                showSelfFea(e) {
+                    console.log("self修饰符log",e.target)
+                },
+                scrollAction() {
+                    for (let i = 0; i < 100000; i++) {
+                        // const element = array[i];
+                        console.log("@")
+
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+<style>
+* {
+    margin-top: 5px;
+}
+.box1 {
+    margin: 2px;
+    background-color: aqua;
+}
+.box2 {
+    margin: 2px;
+    background-color: rgb(119, 155, 22);
+}
+
+.popDemo {
+    margin: 2px;
+    background-color: bisque;
+}
+.list {
+    width: 100px;
+    height: 200px;
+    background-color: bisque;
+    overflow: auto;
+}
+
+li {
+    height: 100px;
+    width: 100px;
+    background-color: blueviolet;
+}
+
+</style>
+</html>

@@ -1,0 +1,113 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分析vue生命周期</title>
+
+    <script src="../js/vue.js"></script>
+
+</head>
+<body>
+    <!-- 
+        Vue生命周期
+       
+     -->
+    <div id="root">
+        <h2 v-if="a">测试</h2>
+        <h2 :style="{opacity}">呼吸灯闪烁效果</h2>
+        <h2>{{n}}</h2>
+        <button @click="add">++</button>
+
+        <button @click="bye">destory vm ，销毁vm</button>
+        <p>vm.$destory(), 完全销毁一个实例，清理它与其它实例的连接，解绑它的全部指令及自定义事件监听 触发 beforeDestroy, destoryed 钩子</p>
+
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+
+
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                name: "Jarvis",
+                msg: 'message',
+                a : false,
+                opacity: '1',
+                n : '1',
+            },
+            methods: {
+                add(){
+                    this.n++
+                },
+                bye(){
+                    this.$destroy()
+                    console.log('销毁自定义事件，不会销毁原生的点击事件，watch n 不在生效')
+                }
+            },
+            watch:{
+                n() {
+                    console.log('n变了~')
+                }
+            },
+            //8个钩子，有路由之后还有3个钩子
+            // 创建：前后
+            // 挂载：前后
+            // 更新：前后
+            // 销毁：前后
+
+            //数据监测和数据代理之前
+            beforeCreate() {
+                console.log('beforeCreate', "数据监测和数据代理创建之前,无法访问 data\n")
+                //debugger//利用debugger 卡断点
+            },
+            created() {
+                console.log('Created', "数据监测和数据代理创建完成,可以访问 data 了\n")
+
+            },
+            beforeMount() {
+                console.log('beforeMount', "虚拟DOM挂载前\n")
+            },
+            //挂载
+            //vue完成模板的解析并把初始的真实DOM元素放入页面后调用mounted
+            mounted() {
+                console.log('mounted')
+                //这里虽然是箭头函数，但是里面的this已经被vue维护成为vm对象
+                // setInterval(() => {
+                //     this.opacity -= 0.01
+                //     if(this.opacity <= 0) this.opacity = 1
+                // }, 16);
+                //页面呈现的是经过Vue编译的Dom
+                //一般在这里开启定时器，网络请求，订阅消息，绑定自定义事件等初始化操作
+            },
+            //data变化
+            beforeUpdate() {
+                console.log('beforeUpdate', "此时数据是新的，但是页面时旧的，此时页面和数据尚未同步")
+            },
+            //虚拟DOM重新渲染
+            updated() {
+                console.log('updated', "此时数据是新的，页面也是新的，页面和数据已经同步了")
+
+            },
+            beforeDestroy() {
+                console.log('beforeDestroy', "此时vm中所有的data，methods,指令等等，都处于可用状态，马上要执行销毁过程，一般在此阶段，关闭定时器，取消订阅消息，解绑自定义事件")
+
+            },
+            //teardown， watchs,child components, and ,evnet listeners,包括生命周期钩子函数
+            destroyed() {
+                console.log('destroyed', "彻底完了。。。gogo思密达")
+
+            },
+
+        })
+
+        // 可以把这个定时器写在vm的外部，但是不推荐,因为定时器会一直调用
+        // setInterval(() => {
+        //             this.opacity -= 0.01
+        //             if(this.opacity <= 0) this.opacity = 1
+        //         }, 16);
+    </script>
+
+</body>
+</html>

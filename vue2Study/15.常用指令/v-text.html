@@ -1,0 +1,42 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-text</title>
+
+    <script src="../js/vue.js"></script>
+
+
+</head>
+<body>
+    <!-- 
+        v-text替换标签内的所有内容，没有插值语法灵活
+     -->
+    <div id="root">
+        <h2>插值语法：{{msg}}</h2>
+        <h2 v-text="msg">v-text</h2>
+<!-- 
+
+
+ -->
+
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        Vue.filter('first4', function(value) {
+            return value.slice(0, 4)
+        })
+
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                time: 1657034001348,
+                msg: 'message'
+            },
+        })
+    </script>
+
+</body>
+</html>

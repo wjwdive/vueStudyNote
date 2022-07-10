@@ -1,0 +1,63 @@
+
+    <html lang="en">
+
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Vue组件</title>
+    
+            <script src="../js/vue.js"></script>
+    
+        </head>
+    
+        <body>
+            <!-- 
+            Vue组件
+            
+         -->
+            <div id="root">
+                
+                <school></school>
+    
+            </div>
+    
+            <script type="text/javascript">
+                Vue.config.productionTip = false
+  
+            //定义school组件
+            const school = Vue.extend({
+                template: `
+                    <div>
+                        <h2>学校名字：{{schoolName}}</h2>
+                        <h2>学校地址：{{schoolAddress}}</h2>
+                    </div>
+                `,
+                data(){
+                    return {
+                        schoolName: 'wjw',
+                        schoolAddress: '上海'
+                    }
+                }
+            })
+    
+            
+    
+    
+            new Vue({
+
+                //根组件
+                el: "#root",
+                components: {
+                    //第二步、key:value ，键值对配置组件注册，局部注册
+                    school
+                }
+            })
+    
+    
+            </script>
+    
+        </body>
+    
+        </html>
+    

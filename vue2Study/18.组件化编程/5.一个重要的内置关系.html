@@ -1,0 +1,90 @@
+
+    <html lang="en">
+
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Vue组件</title>
+    
+            <script src="../js/vue.js"></script>
+    
+        </head>
+    
+        <body>
+            <!-- 
+            Vue内置关系
+            1.一个重要的内置关系：VueComponent.prototype._proto__ === Vue.prototype
+            2.为什么要有这个关系:让组件实例对象（vc）,可以访问到Vue原型上的属性，方法
+
+            实例的隐式原型属性永远指向自己缔造者的原型对象
+         -->
+            <div id="root">
+                
+                <school></school>
+    
+            </div>
+    
+            <script type="text/javascript">
+                Vue.config.productionTip = false
+  
+            //定义school组件
+            const school = Vue.extend({
+                template: `
+                    <div>
+                        <h2>学校名字：{{schoolName}}</h2>
+                        <h2>学校地址：{{schoolAddress}}</h2>
+                    </div>
+                `,
+                data(){
+                    return {
+                        schoolName: 'wjw',
+                        schoolAddress: '上海'
+                    }
+                }
+            })
+    
+            
+    
+    
+            new Vue({
+
+                //根组件
+                el: "#root",
+                components: {
+                    //第二步、key:value ，键值对配置组件注册，局部注册
+                    school
+                }
+            })
+
+            //思考，下面的等式成立吗？
+            console.log(school.prototype._proto__ === Vue.prototype)
+
+            //
+            console.dir(school)
+            //定义一个钩子函数
+            function Demo() {
+                this.a = 1
+                this.b = 2
+            }
+            //创建一个Demo实例对象
+
+            const d = new Demo()
+
+            console.log(Demo.prototype) //显示原型属性
+            console.log(d._proto__) //隐式原型属性
+    
+            //程序员通过显式原型属性操作原型对象，追加一个x属性，值为99
+            Demo.prototype.x = 99//程序员来设置
+            console.log(d._proto__.x) //系统去拿
+
+            //找__proto__的原型链，最后找到Object，有toString
+            //VueComponent 的原型链在指向Object之前，被指向了Vue的原型对象。【非常重要】
+
+
+            </script>
+    
+        </body>
+    
+        </html>
+    
