@@ -72,7 +72,7 @@ npm i less-loder@7
     <Demo ref="demo"></Demo>
     ...
     mounted() {
-        this.$ref.xxx.$on('eventname', this.eventCB)
+        this.$refs.xxx.$on('eventname', this.eventCB)
     },
     methods: {
         eventCB() {

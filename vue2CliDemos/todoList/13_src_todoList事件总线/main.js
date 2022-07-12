@@ -1,7 +1,5 @@
-//15_src_todoList编辑
-/**
- * 
- */
+//13_src_todoList事件总线
+
 import Vue from 'vue'
 import App from './App.vue'
 

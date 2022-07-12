@@ -1,7 +1,8 @@
 <template>
     <div class="todo-box">
         <ul class="todo-main">
-            <TodoItem v-for="todoObj in todos" :key="todoObj.id" :todo="todoObj"/>
+            <TodoItem v-for="todoObj in todos" :key="todoObj.id" :todo="todoObj" :toggleTodo="toggleTodo"
+                :deleteTodo='deleteTodo' />
         </ul>
     </div>
 
@@ -19,7 +20,7 @@ export default {
         }
     },
     //父组件 传递的方法
-    props: ['todos']
+    props: ['todos', 'toggleTodo', 'deleteTodo']
 }
 </script>
 

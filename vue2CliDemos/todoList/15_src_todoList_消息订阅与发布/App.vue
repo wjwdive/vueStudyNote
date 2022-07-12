@@ -57,12 +57,6 @@ export default {
         if(todo.id === id) todo.done = !todo.done
       })
     },
-    //编辑修改一个todo数据
-    updateTodo(id, title) {
-      this.todos.forEach((todo) => {
-        if(todo.id === id) todo.title = title
-      })
-    },
     //删除
     deleteTodo(_, id) {
       //过滤后，要赋值给todos
@@ -111,9 +105,6 @@ export default {
     //       })
     // }),
 
-    //事件总线，监听更新事件
-    this.$bus.$on('updateTodo', this.updateTodo)
-
   },
   //组件即将销毁的时候，注销总线上的监听事件
   beforeDestroy() {
@@ -123,8 +114,6 @@ export default {
     // this.$buf.$off('pubidDelete')
     //取消消息订阅与发布
     pubsub.unsubscribe(this.pubidDelete)
-    //取消监听事件
-    this.$bus.$off('updateTodo')
   }
   }
 </script>

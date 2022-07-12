@@ -7,10 +7,11 @@
     age=18，在这里是编译不通过的，18这类变量必须用引号括起来'' 才能编译通过，-->
     <!-- <Student sName="张三" sex="男" :age="18" /> -->
     <div class="todo-coantainer">
-      <h1>待办事项</h1>
       <TodoHeader :addTodo="addTodo" />
       
-      <TodoList :todos="todos" />
+      <TodoList :todos="todos" 
+      :toggleTodo="toggleTodo" 
+      :deleteTodo="deleteTodo"/>
 
       <TodoFooter :todos="todos" :checkAllTodo="checkAllTodo" :clearAllChecked="clearAllChecked" />
     </div>
@@ -19,7 +20,8 @@
 </template>
 
 <script>
-import pubsub from 'pubsub-js'
+//import HelloWorld from './components/HelloWorld.vue'
+// import Student from './components/Student.vue'
 import TodoHeader from './components/TodoHeader.vue'
 import TodoFooter from './components/TodoFooter.vue'
 import TodoList from './components/TodoList.vue'
@@ -57,14 +59,8 @@ export default {
         if(todo.id === id) todo.done = !todo.done
       })
     },
-    //编辑修改一个todo数据
-    updateTodo(id, title) {
-      this.todos.forEach((todo) => {
-        if(todo.id === id) todo.title = title
-      })
-    },
     //删除
-    deleteTodo(_, id) {
+    deleteTodo(id) {
       //过滤后，要赋值给todos
       this.todos = this.todos.filter((todo) => {
             return todo.id !== id
@@ -90,41 +86,6 @@ export default {
         localStorage.setItem('todos', JSON.stringify(value))
       }
     }
-  },
-  //组件挂载的时候，在总线上注册监听事件
-  mounted() {
-    this.$bus.$on('toggleTodo', this.toggleTodo),
-    // this.$bus.$on('checkAllTodo',this.checkAllTodo)
-    // this.$bus.$on('deleteTodo',this.deleteTodo)
-
-    // pubsub.subscribe('toggleTodo', this.toggleTodo),
-
-    //消息订阅与发布
-    this.pubidDelete = pubsub.subscribe('deleteTodo',this.deleteTodo)
-
-
-    //或者
-    // pubsub.subscribe('toggleTodo', (id) => {
-    //     //过滤后，要赋值给todos
-    //   this.todos = this.todos.filter((todo) => {
-    //         return todo.id !== id
-    //       })
-    // }),
-
-    //事件总线，监听更新事件
-    this.$bus.$on('updateTodo', this.updateTodo)
-
-  },
-  //组件即将销毁的时候，注销总线上的监听事件
-  beforeDestroy() {
-    this.$buf.$off('toggleTodo')
-    // this.$buf.$off('deleteTodo')
-
-    // this.$buf.$off('pubidDelete')
-    //取消消息订阅与发布
-    pubsub.unsubscribe(this.pubidDelete)
-    //取消监听事件
-    this.$bus.$off('updateTodo')
   }
   }
 </script>
