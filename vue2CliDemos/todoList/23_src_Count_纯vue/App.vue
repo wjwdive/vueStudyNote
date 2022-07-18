@@ -12,9 +12,6 @@
       <div class="container">
       
       <Count></Count>
-      <hr>
-      <hr>
-      <Person/>
       </div>
 
     </div>
@@ -24,14 +21,11 @@
 <script>
 
 import Count from './components/Count'
-import Person from './components/Person'
-
 
 export default {
   name: 'App',
   components: {
     Count,
-    Person
   },
   data() {
     return {
@@ -75,7 +69,7 @@ export default {
 
 .container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-around;
   background-color: azure;
 }
@@ -88,9 +82,5 @@ export default {
 .video {
     width: 150px;
     height: 150px;
-}
-
-hr {
-  height: 1px;
 }
 </style>

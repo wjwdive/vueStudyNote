@@ -1,8 +1,8 @@
 <template>
     <div>
-        <h1>当前求和为：{{sum}}</h1>
+        <h1>当前求和为：{{$store.state.sum}}</h1>
         <!-- getter的使用方法，$store.getters.bigSum -->
-        <h1>当前和的10倍：{{bigSum}}</h1>
+        <h1>当前和的10倍：{{$store.getters.bigSum}}</h1>
         <!-- $store.getters 可以简写，把$store.getters.school用 computed方法返回 最终的变量名，而不需要再写一长串前缀了 -->
         <h1>{{school}}的 {{subject}} 课很好</h1>
         <!-- 风格指南：{{}} 里面的表达式尽量简单 -->
@@ -33,23 +33,26 @@ import {mapState, mapGetters, mapMutations, mapActions } from 'vuex'
             }
         }, 
         methods: {
-            //commit的简写形式，借助mapMutations 【对象写法】
-            ...mapMutations('countAbout',{increment: 'INCREMENT', decrement: 'DECREMENT'}),
-/****************************************************** */
-            //mapActions 使用mapActions帮我们生成 this.$store.dispatch 方法 
-            ...mapActions('countAbout',{incrementOdd: 'incrementOdd',incrementWait: 'incrementWait' }),
-        },
 
+            //commit的简写形式，借助mapMutations 【对象写法】
+            ...mapMutations({increment: 'INCREMENT', decrement: 'DECREMENT'}),
+
+/****************************************************** */
+
+            //mapActions 使用mapActions帮我们生成 this.$store.dispatch 方法 
+            ...mapActions({incrementOdd: 'incrementOdd',incrementWait: 'incrementWait' }),
+
+
+        },
         computed: {
 
             //借助mapState生成计算属性，从state中读取数据。（对象写法）
             // ...mapState({he: 'sum', xuexiao: 'school', xueke: 'subject'}),
             //格式化写法，键值一致
-            ...mapState('countAbout', {sum: 'sum', school: 'school', subject: 'subject'}),
-            ...mapState('personAbout', {personList: 'personList'}),
+            ...mapState({sum: 'sum', school: 'school', subject: 'subject', personList: 'personList'}),
 
             //同理，借助 mapGetters 从getters读取数据，简写为：
-            ...mapGetters('countAbout', ['bigSum']),
+            ...mapGetters(['bigSum']),
 
         },
         mounted() {
