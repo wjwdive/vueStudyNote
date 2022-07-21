@@ -5,6 +5,7 @@
         <input type="text" v-model="editName" placeholder="请输入名字"/>
         <button @click="addPerson">添加</button>
         <button @click="addPersonWang">添加一个王姓人</button>
+        <button @click="addPersonServer">添加服务器返回的人名</button>
 
         <ul>
             <li v-for="p in personList" :key="p.id">
@@ -33,6 +34,10 @@
             addPersonWang() {
                 const personObj = {id: nanoid(), name: this.editName}
                 this.$store.dispatch('personAbout/addPersonWang', personObj)
+                this.editName = ''
+            },
+            addPersonServer() {
+                this.$store.dispatch('personAbout/addPersonServer')
                 this.editName = ''
             }
 

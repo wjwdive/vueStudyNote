@@ -1,3 +1,5 @@
+import axios from "axios"
+import { nanoid } from "nanoid"
 export default {
     namespaced: true,
     actions: {
@@ -9,6 +11,17 @@ export default {
             }else {
                 alert('添加人员需王姓')
             }
+        },
+        //用来练习，请求服务器得到数据后 添加到列表
+        addPersonServer(context) {
+            axios.get('https://api.uixsj.cn/hitokoto/get?type=social').then(
+                response => {
+                    context.commit('ADD_PERSON', {id: nanoid(), name: response.data})
+                },
+                error => {
+                    alert(error.message)
+                }
+            )
         }
 
     },
