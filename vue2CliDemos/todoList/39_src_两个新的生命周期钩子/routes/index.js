@@ -6,7 +6,7 @@ import Message from '../pages/Message'
 import MsgDetail from '../pages/MsgDetail'
 
 
-const router =  new VueRouter({
+export default new VueRouter({
     routes: [
         {   
             name: 'guanyu',//路由明明，配合params写法
@@ -18,15 +18,12 @@ const router =  new VueRouter({
             component: Home,
             children: [
                 {
-                    name: 'xinwen',
                     path: 'news',
                     component: News, 
-                    meta: {isAuth: true, title: "新闻"}
                 },
                 {
                     path: 'message',
                     component: Message, 
-                    meta: {isAuth: true, title: "消息"},
                     children: [
                         {   
                             name: 'xiangqing',
@@ -64,43 +61,3 @@ const router =  new VueRouter({
         }
     ]
 })
-
-//路由守卫，全局前置路由守卫，初始化的时候被调用，每次路由切换被调用
-router.beforeEach((to, from, next) => {
-    console.log("前置路由守卫 ", "to: ",to, "from: ", from)
-    //放在这里不合适，因为鉴权未确定，放到afterEach会好点
-    //document.title = to.meta.title || "路由学习"
-    //必须调用next()，否则所有页面都
-    next()
-
-    //也可以用name例如： to.name === 'xinwen'
-    // if(to.path === '/home/news' || to.path === '/home/message'){
-    //     //一些权限逻辑判断
-    //     if(true){
-    //         next()
-    //     }
-    // }
-    
-    //单个判断，太麻烦了，如果有很多页面需要权限判断，使用路由元信息
-    if(to.meta.isAuth) {
-        if(to.path !== '/home/news') {
-            next()
-        }else {
-            alert('没有权限')
-        }
-    }
-
-
-})
-
-//后置路由守卫
-router.afterEach((to, from) =>{
-    console.log("后置路由守卫 ","to: ",to, "from: ", from)
-    //页面跳转好之后 修改title
-    document.title = to.meta.title || "路由学习"
-})
-
-
-
-
-export default router

@@ -1,6 +1,6 @@
 <template>
     <div class="news-box">
-        <li :style="{opacity}">一个呼吸灯</li>
+        <li :style="{opacity}">一个跑马灯</li>
         <li>aaa <input type="text"></li>
         <li>bbb <input type="text"></li>
         <li>ccc <input type="text"></li>
@@ -23,7 +23,7 @@ export default {
         //选16ms， 一帧一变
         this.timer = setInterval(() => {
             console.log('开始了定时器')
-             this.opacity -= 0.01
+            this.opacity -= 0.01
             if(this.opacity <= 0) {
                 this.opacity = 1
             }

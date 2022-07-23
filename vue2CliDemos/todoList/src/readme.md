@@ -44,3 +44,92 @@
     <route-link></route-link>
 </keep-alive>
  ```
+
+
+ ## 路由守卫
+ ### 用于做权限/鉴权系统，例如没有登录，点击我的页面不显示内容
+
+ ### 全局路由守卫
+ #### 1、前置
+ router.beforeEach((to, from, next) => {
+    next()
+ })
+
+#### 2、后置
+ router.afterEach((to, from, next) => {
+    next()
+ })
+
+
+ ### 独享路由守卫 [只有后置路由守卫]
+ #### 写到 路由配置里
+ ```
+ path: ""home,
+ beforeEnter: (tom, from, next) => {
+    next()
+ }
+ ```
+
+
+### 组件内路由守卫
+不是前置，后置，是路由的时间节点
+```
+//进入守卫：通过路由规则，进入该组件时被调用
+beforeRouteEnter(to ,from , next){
+    next()//放行
+}
+//离开守卫：通过路由规则，离开该组件时被调用
+beforeRouteLeave(to, from, next){
+    next()//放行
+}
+
+```
+
+
+### 路由模式： history, hash
+
+#### hash模式，端口号后面带#，网络请求不带#后面的部分
+#### history模式,端口号后面不带#,全部是/分隔的地址，网络请求会发送这部分地址。但是前端一旦刷新，页面很可能就会请求到404，解决方法，后端使用 connect-history-api-fallback 框架。
+
+
+
+
+## nodejs,写一个简单的后台程序
+### 利用express框架
+```
+const express = require('express')
+//使用该组件服务来 消除前端history模式的路由带来的影响
+var history = require('connect-history-api-fallback')
+
+const app = express()
+app.use(history)
+//前端打包的静态资源放在了static目录下
+app.use(express.static(__dirname+'/static'))
+
+app.get('/home', (req, res) => {
+    res.send({
+        name: 'Jarvis',
+        age: 18
+    })
+})
+
+app.listen(5000, (err) => {
+    if(!err) console.log('服务器启动成功')
+})
+
+```
+
+
+## Vue UI 组件库
+### 1.移动端常用UI组件库
+1. vant
+2. Cube UI
+3. Mint UI
+### 2. PC端常用组件库
+1.Element UI
+2.IView UI
+
+
+## elementUI
+全部引入，
+按需引入

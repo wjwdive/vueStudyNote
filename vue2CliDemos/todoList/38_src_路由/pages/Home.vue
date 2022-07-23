@@ -4,7 +4,7 @@
         <router-link replace to="/home/news" class="sub-nav">新闻</router-link>
         <router-link :replace="true" to="/home/message"  class="sub-nav">信息</router-link>
     </div>
-    <!-- 缓存一个写组件名，缓存多个写数组，里面是组件名 缓存单个组件，直接写组件名 -->
+    <!-- 缓存一个写组件名，缓存多个写数组，里面是组件名 -->
     <!-- <keep-alive include="'News'"></keep-alive> -->
     <keep-alive :include="['News']">
         <router-view></router-view>
