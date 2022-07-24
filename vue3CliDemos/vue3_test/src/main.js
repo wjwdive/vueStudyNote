@@ -2,4 +2,14 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 
+//创建应用实例对象 app
 createApp(App).mount('#app')
+
+/**
+//vue2 创建vue app
+const vm = new Vue({
+    render: h => h(app)
+})
+
+vm.$mount('#app')
+ */

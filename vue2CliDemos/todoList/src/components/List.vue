@@ -5,11 +5,15 @@
                 <img :src="user.avatar_url" style="width: 100px" />
             </a>
             <p class="card-text"> {{ user.login }}</p>
+            <div>
+                sss
+            </div>
+            <span>aaa</span>
         </div>
 
         <h1 v-show="userInfo.isFirst">欢迎使用git用户查找</h1>
         <h1 v-show="userInfo.isLoading">加载中...</h1>
-        <h1 v-show="userInfo.errMsg">{{userInfo.errMsg}}</h1>
+        <h1 v-show="userInfo.errMsg">{{ userInfo.errMsg }}</h1>
 
         <!-- 
         list组件可能的四个状态：
@@ -29,14 +33,14 @@ export default {
                 isFirst: true,      //是否是初次展示
                 isLoading: false,   //是否在加载中
                 errMsg: '',         //错误信息
-        }
             }
+        }
 
     },
     methods: {
         getUsers(dataObj) {
             //通过字面量的方式合并对象，重名的属性值以后面参数为准
-            this.userInfo = {...this.userInfo, ...dataObj}
+            this.userInfo = { ...this.userInfo, ...dataObj }
         }
     },
     mounted() {

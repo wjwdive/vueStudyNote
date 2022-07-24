@@ -1,5 +1,36 @@
 # vue3_test
 
+## 使用vue-cli @4.5.17 创建 vue3工程
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Project setup
 ```
 npm install
