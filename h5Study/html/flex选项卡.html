@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>卡片-flexbox</title>
+</head>
+
+<body>
+    <header>顶部</header>
+    <div class="content">
+        <div class="card">
+            <div class="title">DOTA</div>
+            <div class="detail">牛头</div>
+        </div>
+        <div class="card">
+            <div class="title">DOTA</div>
+            <div class="detail">斧王</div>
+        </div>
+        <div class="card">
+            <div class="title">DOTA</div>
+            <div class="detail">小黑</div>
+        </div>
+    </div>
+    <footer>底部</footer>
+    
+</body>
+
+<style>
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 0 0 200px;
+    background-color: rgb(197, 181, 35);
+    flex: 1;
+    padding-top: 10px;
+}
+
+.card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    background-color: blanchedalmond;
+    /* box-shadow: 1em; */
+    height: 260px;
+    border-radius: 4px;
+}
+
+.content >div {
+    /* font-size: 1.5em;
+    color: brown; */
+    flex: 0 0 180px;
+}
+.content >div:hover {
+    /* font-size: 1.5em;
+    color: brown; */
+    align-self: stretch;
+}
+.card >.detail {
+    font-size: 1em;
+    color: rgb(54, 27, 206);
+}
+
+/* 必须设置html，body的高度  */
+html, body {
+    height: 100%;
+}
+
+header, footer {
+    height: 100px;
+    background-color: aqua;
+}
+</style>
+</html>

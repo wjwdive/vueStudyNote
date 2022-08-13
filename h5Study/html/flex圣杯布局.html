@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flex圣杯布局</title>
+</head>
+<body>
+    <header class="header">顶部</header>
+    <section>
+        <div class="main">主要内容区域</div>
+        <div class="left">左侧菜单</div>
+        <div class="right">右侧工具栏</div>
+    </section>
+    <footer class="footer">底部</footer>
+</body>
+
+<style scoped>
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+section {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+}
+
+.main {
+    /* 拉长 */
+    flex:1;
+    background-color: cornsilk;
+}
+
+/* @media(max-width: 768px) { */
+
+/* 左右侧边栏一般是固定的，所以只需固定宽度即可 */
+.left, .right {
+    flex: 0 0 200px;
+    background-color: chartreuse;
+}
+
+@media (max-width: 768px) {
+    /* //三栏布局 */
+section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    /* 拉长 */
+    flex:1;
+    background-color: cornsilk;
+}
+
+/* @media(max-width: 768px) { */
+
+/* 左右侧边栏一般是固定的，所以只需固定宽度即可 */
+.left, .right {
+    flex: 0 0 100px;
+    background-color: chartreuse;
+}
+}
+
+.left {
+    /* 使用order,让左侧边栏在最左侧，但是此时窗口变小，还会压缩主内容的宽度，需要在外部设置一个@media() */
+    order: -1;
+}
+
+
+.header, .footer {
+    width: 100%;
+    height: 60px;
+    background-color: aqua;
+    text-align: center;
+}
+
+    /* //同时设置html.body 设置宽度100% ，中间元素才会充满屏幕 */
+    
+</style>
+
+</html>

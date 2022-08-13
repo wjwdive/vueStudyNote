@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>双翼布局</title>
+</head>
+<body>
+    <div class="wrap">
+    <div id="header">header</div>
+    <div id="content">
+        <!-- 优先渲染center，所以要放在第一个子元素的位置，三个子元素依次是center,left,right -->
+        <!-- 双飞翼布局，要把主区域再包裹一层，通过设置它的外边距，让主区域往中间缩进，但是如果给主区域直接设置外边距，会让整个主区域跟着跑掉， -->
+        <div class="wrap-center">
+            <div id="center">主区域</div>
+        </div>
+
+        <div id="left">左区域</div>
+        <div id="right">右区域</div>
+    </div>
+    <div id="footer">footer</div>
+    </div>
+</body>
+
+<script>
+
+</script>
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    min-width: 600px;
+}
+.wrap {
+    text-align: center;
+}
+
+
+#header,#footer  {
+    width: 100%;
+    height: 50px;
+    background-color: chocolate;
+    clear: both;
+}
+
+
+#content {
+    /* BFC 设置盒子模型上下文 */
+    overflow: hidden;
+    /* 清除浮动效果，使得三个子元素都被文档流控制 */
+    clear: both;
+}
+
+#center,#left,#right {
+    float: left;
+}
+
+#left, #right {
+    width: 200px;
+    height: 200px;
+}
+#left {
+/* 第二个子元素要相对主区域左移100%个宽度，设置margin-left:-100% */
+    margin-left: -100%;
+    background-color: pink;
+}
+#right {
+    margin-left: -200px;
+    background-color:cornflowerblue;
+
+}
+
+/* 设置主区域包裹标签 宽度100%，切浮动 ,且主区域设置margin: 0 200px; 这样主区域就会相对它的父元素进行压缩，就不会带动其他区域到处跑了*/
+.wrap-center {
+    width: 100%;
+    float: left;
+}
+
+#center {
+    margin: 0 200px;
+    background: yellowgreen;
+}
+</style>
+</html>

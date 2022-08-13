@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三栏固定-flexbox</title>
+</head>
+
+<body>
+    <header>顶部</header>
+    <section>主内容</section>
+    <footer>底部</footer>
+    
+</body>
+
+<style>
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+section {
+    background-color: rgb(197, 181, 35);
+    flex: 1;
+}
+
+/* 必须设置html，body的高度  */
+html, body {
+    height: 100%;
+}
+
+header, footer {
+    height: 100px;
+    background-color: aqua;
+}
+</style>
+</html>
